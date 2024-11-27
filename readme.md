@@ -11,7 +11,7 @@ To build the program into a binary executable file, run the `make` command.
 If you want to run the program without making the build files, run the `make run` command.  
 ### Feature Checklist
 - [x] Window Format
-- [ ] List Changed Files
+- [x] List Changed Files
 - [ ] Stage Changes
 - [ ] Unstage Changes
 - [ ] Amend Funcitonality

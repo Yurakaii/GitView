@@ -54,7 +54,7 @@ func topBar() *fyne.Container {
 func gitTopHalf() *fyne.Container {
 	changesLabel := widget.NewLabel("Changes:")
 	amendCheckBox := widget.NewCheck("Amend", func(b bool) {}) // TODO: Add amend checkbox function
-	content := container.NewVBox(changesLabel, amendCheckBox)
+	content := container.NewVBox(changesLabel, listChanges(), amendCheckBox)
 	return content
 }
 
