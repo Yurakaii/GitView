@@ -15,7 +15,8 @@ func listChanges() *fyne.Container{
 	for i := 0; i < length; i++ {
 		file, fileStatus := fileList[i], filesStatusList[i]
 		fileLabel, fileStatusLabel := widget.NewLabel(file), widget.NewLabel(fileStatus)
-		fileHBox := container.NewHBox(fileLabel, fileStatusLabel)
+		stageButton := widget.NewButton("+", func() {git.Stage(file)})
+		fileHBox := container.NewHBox(fileLabel, fileStatusLabel, stageButton)
 		listVBox.Add(fileHBox)
 	}
 	return listVBox

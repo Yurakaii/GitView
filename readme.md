@@ -12,7 +12,7 @@ If you want to run the program without making the build files, run the `make run
 ### Feature Checklist
 - [x] Window Format
 - [x] List Changed Files
-- [ ] Stage Changes
+- [x] Stage Changes
 - [ ] Unstage Changes
 - [ ] Amend Funcitonality
 - [ ] Commit Name Input Functionality
