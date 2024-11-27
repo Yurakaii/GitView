@@ -61,7 +61,7 @@ func gitTopHalf() *fyne.Container {
 func gitBottomHalf() *fyne.Container {
 	commitMessageEntry := widget.NewEntry()
 	// TODO: Add commit buttons
-	commitButton := widget.NewButton("Commit", func() {git.Commit()})
+	commitButton := widget.NewButton("Commit", func() {git.Commit(commitMessageEntry.Text)})
 	commitPushButton := widget.NewButton("Commit and Push", func() {})
 	buttonHBox := container.NewHBox(commitButton, commitPushButton)
 	content := container.NewVBox(commitMessageEntry, buttonHBox)
