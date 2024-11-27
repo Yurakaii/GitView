@@ -14,7 +14,7 @@ If you want to run the program without making the build files, run the `make run
 - [x] List Changed Files
 - [x] Stage Changes
 - [x] Unstage Changes
-- [ ] Amend Funcitonality
+- [x] Amend Funcitonality
 - [x] Commit Name Input Functionality
 - [x] Commit Button Functionality
 - [x] Commit and Push Button Functionality

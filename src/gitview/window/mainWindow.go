@@ -11,6 +11,8 @@ import (
 	"fyne.io/fyne/v2/widget"
 )
 
+var amend bool
+
 // TODO: Fix this
 func createSmallIcon(resource fyne.Resource) *canvas.Image {
 	icon := canvas.NewImageFromResource(resource)
@@ -53,15 +55,21 @@ func topBar() *fyne.Container {
 // TODO: Actually add the list of changes to stage
 func gitTopHalf() *fyne.Container {
 	changesLabel := widget.NewLabel("Changes:")
-	amendCheckBox := widget.NewCheck("Amend", func(b bool) {}) // TODO: Add amend checkbox function
+	amendCheckBox := widget.NewCheck("Amend", func(b bool) {
+		if(b){
+			amend = true
+		}else{
+			amend = false
+		}
+	})
 	content := container.NewVBox(changesLabel, listChanges(), amendCheckBox)
 	return content
 }
 
 func gitBottomHalf() *fyne.Container {
 	commitMessageEntry := widget.NewEntry()
-	commitButton := widget.NewButton("Commit", func() {git.Commit(commitMessageEntry.Text)})
-	commitPushButton := widget.NewButton("Commit and Push", func() {git.CommitAndPush(commitMessageEntry.Text)})
+	commitButton := widget.NewButton("Commit", func() {git.Commit(commitMessageEntry.Text, amend)})
+	commitPushButton := widget.NewButton("Commit and Push", func() {git.CommitAndPush(commitMessageEntry.Text, amend)})
 	buttonHBox := container.NewHBox(commitButton, commitPushButton)
 	content := container.NewVBox(commitMessageEntry, buttonHBox)
 	return content

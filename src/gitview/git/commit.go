@@ -10,7 +10,7 @@ import (
 
 // Used for the commit button, and for the commit and push feature.
 // TODO: make a YAML configuration file for git configuration
-func Commit(name string) {
+func Commit(name string, amend bool) {
 	var err error
 
 	// Creates the commit
@@ -20,6 +20,7 @@ func Commit(name string) {
 			Email: "john@doe.org", // add this to the config
 			When:  time.Now(),
 		},
+		Amend: amend,
 	})
 	if(err != nil) {
 		panic(err)
@@ -34,7 +35,7 @@ func Commit(name string) {
 }
 
 // TODO: Set origin in the config file
-func CommitAndPush(name string) {
-	Commit(name)
+func CommitAndPush(name string, amend bool) {
+	Commit(name, amend)
 	Repo.Push(&git.PushOptions{}) // Default goes to origin, to be changed in the configuration file
 }
