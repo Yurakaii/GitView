@@ -7,6 +7,6 @@ import (
 
 func main() {
 	a := app.New()
-	window.LaunchWindow(a)
+	window.LaunchMainWindow(a)
 	a.Run()
 }

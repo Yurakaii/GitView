@@ -72,7 +72,7 @@ func gitContent() *container.Split {
 	return content
 }
 
-func LaunchWindow(a fyne.App) {
+func LaunchMainWindow(a fyne.App) {
 	windowContent := container.NewVBox(topBar(), gitContent())
 	mainWindow := a.NewWindow("GitView")
 	mainWindow.SetContent(windowContent)
