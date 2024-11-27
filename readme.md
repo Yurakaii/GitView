@@ -13,7 +13,7 @@ If you want to run the program without making the build files, run the `make run
 - [x] Window Format
 - [x] List Changed Files
 - [x] Stage Changes
-- [ ] Unstage Changes
+- [x] Unstage Changes
 - [ ] Amend Funcitonality
 - [ ] Commit Name Input Functionality
 - [ ] Commit Button Functionality
