@@ -32,3 +32,9 @@ func Commit(name string) {
 	}
 	fmt.Println(obj)
 }
+
+// TODO: Set origin in the config file
+func CommitAndPush(name string) {
+	Commit(name)
+	Repo.Push(&git.PushOptions{}) // Default goes to origin, to be changed in the configuration file
+}
