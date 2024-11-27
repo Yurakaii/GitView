@@ -49,10 +49,33 @@ func topBar() *fyne.Container {
 	return toolbar
 }
 
+// TODO: Actually add the list of changes to stage
+func gitTopHalf() *fyne.Container {
+	changesLabel := widget.NewLabel("Changes:")
+	amendCheckBox := widget.NewCheck("Amend", func(b bool) {}) // TODO: Add amend checkbox function
+	content := container.NewVBox(changesLabel, amendCheckBox)
+	return content
+}
+
+func gitBottomHalf() *fyne.Container {
+	commitMessageEntry := widget.NewEntry()
+	// TODO: Add commit buttons
+	commitButton := widget.NewButton("Commit", func() {})
+	commitPushButton := widget.NewButton("Commit and Push", func() {})
+	buttonHBox := container.NewHBox(commitButton, commitPushButton)
+	content := container.NewVBox(commitMessageEntry, buttonHBox)
+	return content
+}
+
+func gitContent() *container.Split {
+	content := container.NewVSplit(gitTopHalf(), gitBottomHalf())
+	return content
+}
+
 func LaunchWindow(a fyne.App) {
-	content := container.NewVBox(topBar())
+	windowContent := container.NewVBox(topBar(), gitContent())
 	mainWindow := a.NewWindow("GitView")
-	mainWindow.SetContent(content)
+	mainWindow.SetContent(windowContent)
 	mainWindow.Resize(fyne.NewSize(350,800))
 	mainWindow.Show()
 }
