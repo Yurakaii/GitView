@@ -2,6 +2,7 @@ package window
 
 import (
 	"fmt"
+	"gitview/src/gitview/git"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -60,7 +61,7 @@ func gitTopHalf() *fyne.Container {
 func gitBottomHalf() *fyne.Container {
 	commitMessageEntry := widget.NewEntry()
 	// TODO: Add commit buttons
-	commitButton := widget.NewButton("Commit", func() {})
+	commitButton := widget.NewButton("Commit", func() {git.Commit()})
 	commitPushButton := widget.NewButton("Commit and Push", func() {})
 	buttonHBox := container.NewHBox(commitButton, commitPushButton)
 	content := container.NewVBox(commitMessageEntry, buttonHBox)
