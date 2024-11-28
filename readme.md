@@ -18,7 +18,9 @@ If you want to run the program without making the build files, run the `make run
 - [x] Commit Name Input Functionality
 - [x] Commit Button Functionality
 - [x] Commit and Push Button Functionality
-- [ ] Toolbar Functionality
+- [x] Reload Button Functionality
+- [ ] Configuration file
 ### Bugfix Checklist
 - [ ] Resizing not working
 - [ ] Toolbar buttons won't shrink
+- [ ] Stage and Unstage buttons not aligning to the right

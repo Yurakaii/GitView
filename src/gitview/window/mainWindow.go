@@ -1,10 +1,11 @@
 package window
 
 import (
-	"fmt"
+	//"fmt"
 	"gitview/src/gitview/git"
 
 	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/theme"
@@ -12,6 +13,13 @@ import (
 )
 
 var amend bool
+var a fyne.App
+var mainWindow fyne.Window
+var windowContent *fyne.Container
+
+func CreateApp() {
+	a = app.New()
+}
 
 // TODO: Fix this
 func createSmallIcon(resource fyne.Resource) *canvas.Image {
@@ -20,13 +28,12 @@ func createSmallIcon(resource fyne.Resource) *canvas.Image {
 	return icon
 }
 
-func topBar() *fyne.Container {
-	// TODO: Move the internal functions and add git integration.
-	// TODO: Make a function that makes the button variables to avoid recursion.
+func toolBar() *fyne.Container {
 	reloadButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ViewRefreshIcon()).Resource, func() {
-		fmt.Println("Reload Button Pressed") 
+		loadContent() 
 	})
-	undoButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ContentUndoIcon()).Resource, func() {
+	// Not sure what to do with these yet, may get rid of them.
+/* 	undoButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ContentUndoIcon()).Resource, func() {
 		fmt.Println("Undo Button Pressed")
 	})
 	downloadButton := widget.NewButtonWithIcon("", createSmallIcon(theme.DownloadIcon()).Resource, func() {
@@ -40,19 +47,18 @@ func topBar() *fyne.Container {
 	})
 	collapseButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ZoomOutIcon()).Resource, func() {
 		fmt.Println("Collapse Button Pressed")
-	})
+	}) */
 	toolbar := container.NewHBox(
 		reloadButton,
-		undoButton,
+		/* undoButton,
 		downloadButton,
 		visibilityButton,
 		expandButton,
-		collapseButton,
+		collapseButton, */
 	)
 	return toolbar
 }
 
-// TODO: Actually add the list of changes to stage
 func gitTopHalf() *fyne.Container {
 	changesLabel := widget.NewLabel("Changes:")
 	amendCheckBox := widget.NewCheck("Amend", func(b bool) {
@@ -80,10 +86,18 @@ func gitContent() *container.Split {
 	return content
 }
 
-func LaunchMainWindow(a fyne.App) {
-	windowContent := container.NewVBox(topBar(), gitContent())
-	mainWindow := a.NewWindow("GitView")
+func loadContent() {
+	windowContent = container.NewVBox(toolBar(), gitContent())
 	mainWindow.SetContent(windowContent)
+}
+
+func LaunchMainWindow() {
+	mainWindow = a.NewWindow("GitView")
+	loadContent()
 	mainWindow.Resize(fyne.NewSize(350,800))
 	mainWindow.Show()
+}
+
+func RunApp() {
+	a.Run()
 }
