@@ -1,13 +1,13 @@
 package window
 
 import (
-	//"fmt"
 	"gitview/src/gitview/git"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
@@ -15,7 +15,8 @@ import (
 var amend bool
 var a fyne.App
 var mainWindow fyne.Window
-var windowContent *fyne.Container
+var windowContent *container.Split
+const defaultWindowWidth, defaultWindowHeight float32 = 275, 500
 
 func CreateApp() {
 	a = app.New()
@@ -32,34 +33,13 @@ func toolBar() *fyne.Container {
 	reloadButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ViewRefreshIcon()).Resource, func() {
 		loadContent() 
 	})
-	// Not sure what to do with these yet, may get rid of them.
-/* 	undoButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ContentUndoIcon()).Resource, func() {
-		fmt.Println("Undo Button Pressed")
-	})
-	downloadButton := widget.NewButtonWithIcon("", createSmallIcon(theme.DownloadIcon()).Resource, func() {
-		fmt.Println("Download Button Pressed")
-	})
-	visibilityButton := widget.NewButtonWithIcon("", createSmallIcon(theme.VisibilityIcon()).Resource, func() {
-		fmt.Println("Visibilty Button Pressed")
-	})
-	expandButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ZoomInIcon()).Resource, func() {
-		fmt.Println("Expand Button Pressed")
-	})
-	collapseButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ZoomOutIcon()).Resource, func() {
-		fmt.Println("Collapse Button Pressed")
-	}) */
 	toolbar := container.NewHBox(
 		reloadButton,
-		/* undoButton,
-		downloadButton,
-		visibilityButton,
-		expandButton,
-		collapseButton, */
 	)
 	return toolbar
 }
 
-func gitTopHalf() *fyne.Container {
+func topHalf() *fyne.Container {
 	changesLabel := widget.NewLabel("Changes:")
 	amendCheckBox := widget.NewCheck("Amend", func(b bool) {
 		if(b){
@@ -68,33 +48,48 @@ func gitTopHalf() *fyne.Container {
 			amend = false
 		}
 	})
-	content := container.NewVBox(changesLabel, listChanges(), amendCheckBox)
+	content := container.New(
+		layout.NewVBoxLayout(),
+		toolBar(),
+		changesLabel,
+		listChanges(),
+		layout.NewSpacer(),
+		amendCheckBox,
+	)
 	return content
 }
 
-func gitBottomHalf() *fyne.Container {
+func bottomHalf() *fyne.Container {
 	commitMessageEntry := widget.NewEntry()
 	commitButton := widget.NewButton("Commit", func() {git.Commit(commitMessageEntry.Text, amend)})
 	commitPushButton := widget.NewButton("Commit and Push", func() {git.CommitAndPush(commitMessageEntry.Text, amend)})
 	buttonHBox := container.NewHBox(commitButton, commitPushButton)
-	content := container.NewVBox(commitMessageEntry, buttonHBox)
+	content := container.New(
+		layout.NewVBoxLayout(),
+		commitMessageEntry,
+		layout.NewSpacer(),
+		buttonHBox,
+	)
 	return content
 }
 
 func gitContent() *container.Split {
-	content := container.NewVSplit(gitTopHalf(), gitBottomHalf())
+	content := container.NewVSplit(
+		topHalf(),
+		bottomHalf(),
+	)
 	return content
 }
 
 func loadContent() {
-	windowContent = container.NewVBox(toolBar(), gitContent())
+	windowContent = gitContent()
 	mainWindow.SetContent(windowContent)
 }
 
 func LaunchMainWindow() {
 	mainWindow = a.NewWindow("GitView")
 	loadContent()
-	mainWindow.Resize(fyne.NewSize(350,800))
+	mainWindow.Resize(fyne.NewSize(defaultWindowWidth, defaultWindowHeight))
 	mainWindow.Show()
 }
 

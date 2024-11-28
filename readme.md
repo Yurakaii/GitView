@@ -21,6 +21,6 @@ If you want to run the program without making the build files, run the `make run
 - [x] Reload Button Functionality
 - [ ] Configuration file
 ### Bugfix Checklist
-- [ ] Resizing not working
+- [x] Resizing not working
 - [ ] Toolbar buttons won't shrink
 - [x] Stage and Unstage buttons not aligning to the right
