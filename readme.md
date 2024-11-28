@@ -23,4 +23,4 @@ If you want to run the program without making the build files, run the `make run
 ### Bugfix Checklist
 - [ ] Resizing not working
 - [ ] Toolbar buttons won't shrink
-- [ ] Stage and Unstage buttons not aligning to the right
+- [x] Stage and Unstage buttons not aligning to the right

@@ -5,6 +5,8 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/layout"
+	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 )
 
@@ -15,9 +17,9 @@ func listChanges() *fyne.Container{
 	for i := 0; i < length; i++ {
 		file, fileStatus := fileList[i], filesStatusList[i]
 		fileLabel, fileStatusLabel := widget.NewLabel(file), widget.NewLabel(fileStatus)
-		fileHBox := container.NewHBox(fileLabel, fileStatusLabel)
-		stageButton := widget.NewButton("+", func() {git.Stage(file)})
-		unStageButton := widget.NewButton("-", func() {git.UnStage(file)})
+		fileHBox := container.NewHBox(fileLabel, layout.NewSpacer(), fileStatusLabel)
+		stageButton := widget.NewButtonWithIcon("", theme.ContentAddIcon(), func() {git.Stage(file)})
+		unStageButton := widget.NewButtonWithIcon("", theme.ContentRemoveIcon(), func() {git.UnStage(file)})
 		if (fileStatus == " ") {
 			fileHBox.Add(unStageButton)
 		} else {
