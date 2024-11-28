@@ -1,6 +1,7 @@
 package git
 
 import (
+	"gitview/src/gitview/config"
 	"time"
 
 	"github.com/go-git/go-git/v5"
@@ -13,8 +14,8 @@ func Commit(name string, amend bool) {
 	// Creates the commit
 	Worktree.Commit(name, &git.CommitOptions{
 		Author: &object.Signature{
-			Name:  "test", // add this to the config
-			Email: "john@doe.org", // add this to the config
+			Name:  config.ReadConfig().Name,
+			Email: config.ReadConfig().Email,
 			When:  time.Now(),
 		},
 		Amend: amend,
