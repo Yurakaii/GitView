@@ -61,7 +61,9 @@ func topHalf() *fyne.Container {
 }
 
 func bottomHalf() *fyne.Container {
+	const placeHolder string = "Commit Message"
 	commitMessageEntry := widget.NewEntry()
+	commitMessageEntry.SetPlaceHolder(placeHolder)
 	commitButton := widget.NewButton("Commit", func() {
 		git.Commit(commitMessageEntry.Text, amend)
 		loadContent()
