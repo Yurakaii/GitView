@@ -51,6 +51,7 @@ func topHalf() *fyne.Container {
 	content := container.New(
 		layout.NewVBoxLayout(),
 		toolBar(),
+		widget.NewSeparator(),
 		changesLabel,
 		listChanges(),
 		layout.NewSpacer(),
