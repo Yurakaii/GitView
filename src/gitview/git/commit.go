@@ -25,5 +25,8 @@ func Commit(name string, amend bool) {
 // TODO: Set origin in the config file
 func CommitAndPush(name string, amend bool) {
 	Commit(name, amend)
-	Repo.Push(&git.PushOptions{}) // Default goes to origin, to be changed in the configuration file
+	Repo.Push(&git.PushOptions{
+		RemoteURL: config.ReadConfig().RemoteURL,
+		Force: config.ReadConfig().ForcePush,
+	})
 }

@@ -9,12 +9,14 @@ If you want to run the program without making the build files, run the `make run
 ## Configuration  
 - Put the `gitview.json` file in the directory that you are running the program from. Otherwise, it won't work.  
 - Make sure to add the configuration file to your **.gitignore** file.  
-A sample configuration is provided below and contains all the options.
+- You can download a sample configuration from [the examples](/examples/gitview.json),  or you can just copy the one below and put it in a file named `gitview.json`
 ```json
 {
     "name": "example",
     "email": "john@doe.org",
-    "project-directory": "."
+    "directory": ".",
+    "remoteURL": "https://example.com/UserID/Repo.git",
+    "forcePush": false
 }
 ```
 ### Feature Checklist
