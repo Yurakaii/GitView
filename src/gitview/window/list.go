@@ -18,8 +18,14 @@ func listChanges() *fyne.Container{
 		file, fileStatus := fileList[i], filesStatusList[i]
 		fileLabel, fileStatusLabel := widget.NewLabel(file), widget.NewLabel(fileStatus)
 		fileHBox := container.NewHBox(fileLabel, layout.NewSpacer(), fileStatusLabel)
-		stageButton := widget.NewButtonWithIcon("", theme.ContentAddIcon(), func() {git.Stage(file)})
-		unStageButton := widget.NewButtonWithIcon("", theme.ContentRemoveIcon(), func() {git.UnStage(file)})
+		stageButton := widget.NewButtonWithIcon("", theme.ContentAddIcon(), func() {
+			git.Stage(file)
+			loadContent()
+		})
+		unStageButton := widget.NewButtonWithIcon("", theme.ContentRemoveIcon(), func() {
+			git.UnStage(file)
+			loadContent()
+		})
 		if (fileStatus == " ") {
 			fileHBox.Add(unStageButton)
 		} else {
