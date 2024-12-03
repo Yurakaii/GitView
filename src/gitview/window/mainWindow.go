@@ -6,7 +6,6 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/theme"
@@ -23,15 +22,8 @@ func CreateApp() {
 	a = app.New()
 }
 
-// TODO: Fix this
-func createSmallIcon(resource fyne.Resource) *canvas.Image {
-	icon := canvas.NewImageFromResource(resource)
-	icon.Resize(fyne.NewSize(16,16))
-	return icon
-}
-
 func toolBar() *fyne.Container {
-	reloadButton := widget.NewButtonWithIcon("", createSmallIcon(theme.ViewRefreshIcon()).Resource, func() {
+	reloadButton := widget.NewButtonWithIcon("", theme.ViewRefreshIcon(), func() {
 		loadContent() 
 	})
 	toolbar := container.NewHBox(
