@@ -2,6 +2,5 @@
     "name": "example",
     "email": "john@doe.org",
     "directory": ".",
-    "remoteURL": "https://example.com/UserID/Repo.git",
-    "forcePush": false
+    "remoteURL": "https://example.com/UserID/Repo.git"
 }

@@ -15,8 +15,7 @@ If you want to run the program without making the build files, run the `make run
     "name": "example",
     "email": "john@doe.org",
     "directory": ".",
-    "remoteURL": "https://example.com/UserID/Repo.git",
-    "forcePush": false
+    "remoteURL": "https://example.com/UserID/Repo.git"
 }
 ```
 ### Feature Checklist

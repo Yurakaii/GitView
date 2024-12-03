@@ -27,6 +27,6 @@ func CommitAndPush(name string, amend bool) {
 	Commit(name, amend)
 	Repo.Push(&git.PushOptions{
 		RemoteURL: config.ReadConfig().RemoteURL,
-		Force: config.ReadConfig().ForcePush,
+		Force: config.ForcePush,
 	})
 }

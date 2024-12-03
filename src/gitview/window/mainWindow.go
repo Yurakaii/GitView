@@ -1,6 +1,7 @@
 package window
 
 import (
+	"gitview/src/gitview/config"
 	"gitview/src/gitview/git"
 
 	"fyne.io/fyne/v2"
@@ -64,6 +65,13 @@ func bottomHalf() *fyne.Container {
 	const placeHolder string = "Commit Message"
 	commitMessageEntry := widget.NewEntry()
 	commitMessageEntry.SetPlaceHolder(placeHolder)
+	forcePushCheckBox := widget.NewCheck("Force Push", func(b bool) {
+		if(b){
+			config.ForcePush = true
+		}else{
+			config.ForcePush = false
+		}
+	})
 	commitButton := widget.NewButton("Commit", func() {
 		git.Commit(commitMessageEntry.Text, amend)
 		loadContent()
@@ -77,6 +85,7 @@ func bottomHalf() *fyne.Container {
 		layout.NewVBoxLayout(),
 		commitMessageEntry,
 		layout.NewSpacer(),
+		forcePushCheckBox,
 		buttonHBox,
 	)
 	return content

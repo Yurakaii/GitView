@@ -5,14 +5,13 @@ import (
 	"log"
 	"os"
 )
-
+var ForcePush bool
 
 type Config struct{
 	Name string `json:"name"`
 	Email string `json:"email"`
 	Directory string `json:"directory"`
 	RemoteURL string `json:"remoteURL"`
-	ForcePush bool `json:"forcePush"`
 }
 
 const configLocation string = "./gitview.json"
